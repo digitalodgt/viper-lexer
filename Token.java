@@ -11,13 +11,13 @@ public final class Token {
     public static final int MULT   = 3;  // *
     public static final int DIV    = 4;  // /
     public static final int MOD    = 5;  // %
-    public static final int EQ     = 6;  // ^
+    public static final int EQ     = 6;  // =
     public static final int LPAREN = 7;  // (
     public static final int RPAREN = 8;  // )
     public static final int COLON  = 9;  // :
     public static final int LBRACE = 10; // {
     public static final int RBRACE = 11; // }
-    public static final int COMP   = 12; // =
+    public static final int COMP   = 12; // ==
     public static final int LT     = 13; // <
     public static final int LE     = 14; // <=
     public static final int ID     = 15; // nombre de variable o subrutina
@@ -66,6 +66,7 @@ public final class Token {
         "else",
         "while",
         "return",
+        "!",
         "lexer error",
         "parser error"
     };
@@ -87,7 +88,7 @@ public final class Token {
 
     // Representar token como string
     public String toString() {
-        if(this.id == Token.STR_CONST || this.id == Token.INT_CONST || this.id == Token.BOOL_CONST) {
+        if(this.id == Token.STR_CONST || this.id == Token.INT_CONST || this.id == Token.BOOL_CONST || this.id == Token.ID) {
             if (this.val != null) {
                 return Token.tokens[this.id] + " : " + this.val;
             }

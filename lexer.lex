@@ -18,6 +18,11 @@ import java.io.FileInputStream;
         Codigo a inyectarse
     */
 
+    // Si necesito crear variables puedo hacerlo aqui
+    // Puede servirme como ayuda al trabajar los STR_CONST
+    static int num = 123;
+    static int text = "prueba";
+
     public static void main(String[] args) throws IOException {
 
         FileInputStream fis = new FileInputStream(args[0]);
@@ -56,15 +61,23 @@ import java.io.FileInputStream;
 
 
 SEMI = ";"
-WHITE = (" "|\t|\n)
+WHITE = (" "|\t|\n|\r)
+
+MINUSCULAS = [a-z]
+MAYUSCULAS = [A-Z]
+ALFANUM = [a-zA-Z0-9]
+DIGIT = [0-9]
 
 
 
 %%
 
-<YYINITIAL>{SEMI}   { return new Token(Token.SEMI);   }
 
-<YYINITIAL>{WHITE}  { /* NO HACER NADA */             }
+
+
+<YYINITIAL>{SEMI}   { return new Token( Token.SEMI );   }
+
+<YYINITIAL>{WHITE}  {  }
 
 <YYINITIAL>.        {
                         System.out.println("Found: " + yytext());
