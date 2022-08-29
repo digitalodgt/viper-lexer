@@ -32,11 +32,12 @@ public final class Token {
     public static final int ELSE   = 24; // keyword else
     public static final int WHILE  = 25; // keyword while
     public static final int RETURN = 26; // keyword return
-    public static final int ERROR  = 27; // error de lexer
-    public static final int error  = 28; // error de parser
+    public static final int NEG    = 27; // !
+    public static final int ERROR  = 28; // error de lexer
+    public static final int error  = 29; // error de parser
 
 
-    // Esto puede ser bastante util
+    // Tokens
     private static final String[] tokens = {
         ";",
         "+",
