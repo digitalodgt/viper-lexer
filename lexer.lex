@@ -21,7 +21,7 @@ import java.io.FileInputStream;
     // Si necesito crear variables puedo hacerlo aqui
     // Puede servirme como ayuda al trabajar los STR_CONST
     static int num = 123;
-    static int text = "prueba";
+    static String text = "prueba";
 
     public static void main(String[] args) throws IOException {
 
@@ -60,24 +60,95 @@ import java.io.FileInputStream;
 
 
 
-SEMI = ";"
+SEMI = ";" 
 WHITE = (" "|\t|\n|\r)
 
 MINUSCULAS = [a-z]
 MAYUSCULAS = [A-Z]
 ALFANUM = [a-zA-Z0-9]
 DIGIT = [0-9]
-
-
+BOOL = ("true"|"false")
+STRI = "\""
+CHARS = [^{STRI}]*
+COMI = "'"
+CHARSCOM = [^{COMI}]*
 
 %%
 
 
+<YYINITIAL>{SEMI}   	{ return new Token( Token.SEMI );   }
 
+<YYINITIAL>{WHITE}  	{  }
 
-<YYINITIAL>{SEMI}   { return new Token( Token.SEMI );   }
+<YYINITIAL>"-"		{ return new Token( Token.MINUS );	}
 
-<YYINITIAL>{WHITE}  {  }
+<YYINITIAL>"+"		{ return new Token( Token.PLUS );	}
+
+<YYINITIAL>"*"		{ return new Token( Token.MULT );	}
+
+<YYINITIAL>"/"		{ return new Token( Token.DIV );	}
+
+<YYINITIAL>"%"		{ return new Token( Token.MOD );	}
+
+<YYINITIAL>"="		{ return new Token( Token.EQ );		}
+
+<YYINITIAL>"("		{ return new Token( Token.LPAREN );	}
+
+<YYINITIAL>")"		{ return new Token( Token.RPAREN );	}
+
+<YYINITIAL>":"		{ return new Token( Token.COLON );	}
+
+<YYINITIAL>"{"		{ return new Token( Token.LBRACE );	}
+
+<YYINITIAL>"}"		{ return new Token( Token.RBRACE );	}
+
+<YYINITIAL>"=="		{ return new Token( Token.COMP );	}
+
+<YYINITIAL>"<"		{ return new Token( Token.LT );		}
+
+<YYINITIAL>"<="		{ return new Token( Token.LE );		}
+
+<YYINITIAL>"if"		{ return new Token( Token.IF );		}
+
+<YYINITIAL>"int"	{ return new Token( Token.INT );	}
+
+<YYINITIAL>"bool"	{ return new Token( Token.BOOL );	}
+
+<YYINITIAL>"str"	{ return new Token( Token.STR );	}
+
+<YYINITIAL>"def"	{ return new Token( Token.DEF );	}
+
+<YYINITIAL>"else"	{ return new Token( Token.ELSE );	}
+
+<YYINITIAL>"while"	{ return new Token( Token.WHILE );	}
+
+<YYINITIAL>"return"	{ return new Token( Token.RETURN );	}
+
+<YYINITIAL>"!"		{ return new Token( Token.NEG );	}
+
+<YYINITIAL>{STRI}	{ yybegin( STRING );	}
+
+<STRING>{CHARS}	{ return new Token( Token.STR_CONST, yytext() );		}
+
+<STRING>{STRI}		{ yybegin( YYINITIAL);	}
+
+<YYINITIAL>{COMI}	{ yybegin( STRING );	}
+
+<STRING>{CHARSCOM}	{ return new Token( Token.STR_CONST, yytext() );		}
+
+<STRING>{COMI}		{ yybegin( YYINITIAL);	}
+
+<YYINITIAL>{DIGIT}{DIGIT}*	{ return new Token( Token.INT_CONST, yytext() );	}
+
+<YYINITIAL>{BOOL}	{return new Token( Token.BOOL_CONST, yytext() );		}
+
+<YYINITIAL>{MINUSCULAS}+{ALFANUM}*	{return new Token( Token.ID, yytext() );	}
+
+<YYINITIAL>"#"		{ yybegin( COMMENT );			}
+
+<COMMENT>\n		{ yybegin( YYINITIAL );			}
+
+<COMMENT>.		{ }
 
 <YYINITIAL>.        {
                         System.out.println("Found: " + yytext());
