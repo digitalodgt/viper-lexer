@@ -57,6 +57,7 @@ import java.io.FileInputStream;
 
 %state COMMENT
 %state STRING
+%state STRINGQ
 
 
 
@@ -68,10 +69,10 @@ MAYUSCULAS = [A-Z]
 ALFANUM = [a-zA-Z0-9]
 DIGIT = [0-9]
 BOOL = ("true"|"false")
-STRI = "\""
-CHARS = [^{STRI}]*
+QUOT = "\""
+CHARS = [^{QUOT}]+
 COMI = "'"
-CHARSCOM = [^{COMI}]*
+CHARSCOM = [^{COMI}]+
 
 %%
 
@@ -126,11 +127,11 @@ CHARSCOM = [^{COMI}]*
 
 <YYINITIAL>"!"		{ return new Token( Token.NEG );	}
 
-<YYINITIAL>{STRI}	{ yybegin( STRING );	}
+<YYINITIAL>{QUOT}	{ yybegin( STRINGQ );	}
 
-<STRING>{CHARS}	{ return new Token( Token.STR_CONST, yytext() );		}
+<STRINGQ>{CHARS}	{ return new Token( Token.STR_CONST, yytext() );		}
 
-<STRING>{STRI}		{ yybegin( YYINITIAL);	}
+<STRINGQ>{QUOT}		{ yybegin( YYINITIAL);	}
 
 <YYINITIAL>{COMI}	{ yybegin( STRING );	}
 

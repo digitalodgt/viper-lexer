@@ -85,10 +85,12 @@ public class Lexer {
 	private final int STRING = 2;
 	private final int YYINITIAL = 0;
 	private final int COMMENT = 1;
+	private final int STRINGQ = 3;
 	private final int yy_state_dtrans[] = {
 		0,
-		39,
-		36
+		40,
+		42,
+		44
 	};
 	private void yybegin (int state) {
 		yy_lexical_state = state;
@@ -268,12 +270,12 @@ public class Lexer {
 		/* 36 */ YY_NO_ANCHOR,
 		/* 37 */ YY_NO_ANCHOR,
 		/* 38 */ YY_NO_ANCHOR,
-		/* 39 */ YY_NOT_ACCEPT,
-		/* 40 */ YY_NO_ANCHOR,
+		/* 39 */ YY_NO_ANCHOR,
+		/* 40 */ YY_NOT_ACCEPT,
 		/* 41 */ YY_NO_ANCHOR,
-		/* 42 */ YY_NO_ANCHOR,
+		/* 42 */ YY_NOT_ACCEPT,
 		/* 43 */ YY_NO_ANCHOR,
-		/* 44 */ YY_NO_ANCHOR,
+		/* 44 */ YY_NOT_ACCEPT,
 		/* 45 */ YY_NO_ANCHOR,
 		/* 46 */ YY_NO_ANCHOR,
 		/* 47 */ YY_NO_ANCHOR,
@@ -297,32 +299,33 @@ public class Lexer {
 		/* 65 */ YY_NO_ANCHOR,
 		/* 66 */ YY_NO_ANCHOR,
 		/* 67 */ YY_NO_ANCHOR,
-		/* 68 */ YY_NO_ANCHOR
+		/* 68 */ YY_NO_ANCHOR,
+		/* 69 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,130,
 "33:9,2,3,33:2,4,33:18,2,31,32,39,33,9,33,34,11,12,7,6,33,5,33,8,35:10,13,1," +
 "16,10,33:3,38:26,33:6,36,21,37,26,27,18,37,29,17,37:2,23,37,19,22,37:2,25,2" +
 "4,20,30,37,28,37:3,14,33,15,33:2,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,69,
-"0,1:8,2,1:5,3,4,1:4,5,1:3,6:9,1:2,7,8:2,9,10,11,12,13,14,15,16,17,18,19,20," +
-"21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,6,36,37")[0];
+	private int yy_rmap[] = unpackFromString(1,70,
+"0,1:8,2,1:5,3,4,1:4,5,1:3,6:9,1:2,7,1,8,1,9,10,11,12,13,14,15,16,17,18,19,2" +
+"0,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,6,36,37")[0];
 
 	private int yy_nxt[][] = unpackFromString(38,40,
-"1,2,3:3,4,5,6,7,8,9,10,11,12,13,14,15,16,40,66,59,60,66:2,51,67,52,61,68,66" +
-":2,17,18,19,20,21,66:2,19,22,-1:50,23,-1:39,24,-1:46,66,25,42,66:11,-1:4,66" +
-":4,-1:36,21,-1:21,66:14,-1:4,66:4,-1,1,41:31,37,41,43,41:5,-1,38:33,-1,38:5" +
-",1,34:2,35,-1,34:35,-1:17,66:14,-1:4,66,62,66:2,-1:2,41:31,38,41,43,41:5,-1" +
-":17,66:3,26,66:10,-1:4,66:4,-1:2,43:31,-1,43:7,-1:17,66:8,27,66:5,-1:4,66:4" +
-",-1:18,66,28,66:12,-1:4,66:4,-1:18,66:10,29,66:3,-1:4,66:4,-1:18,66:6,30,66" +
-":7,-1:4,66:4,-1:18,66:10,31,66:3,-1:4,66:4,-1:18,66:10,32,66:3,-1:4,66:4,-1" +
-":18,66:2,33,66:11,-1:4,66:4,-1:18,66:3,44,66:10,-1:4,66:4,-1:18,66:10,45,66" +
-":3,-1:4,66:4,-1:18,66:13,46,-1:4,66:4,-1:18,66:5,47,66:8,-1:4,66:4,-1:18,66" +
-":7,48,66:6,-1:4,66:4,-1:18,66:7,46,66:6,-1:4,66:4,-1:18,66:6,49,66:7,-1:4,6" +
-"6:4,-1:18,66:8,50,66:5,-1:4,66:4,-1:18,66:8,53,66:5,-1:4,66:4,-1:18,66:5,54" +
-",66:8,-1:4,66:4,-1:18,66:6,55,66:7,-1:4,66:4,-1:18,66:6,56,66:7,-1:4,66:4,-" +
-"1:18,66:3,65,66:10,-1:4,66:4,-1:18,57,66:13,-1:4,66:4,-1:18,66:13,58,-1:4,6" +
-"6:4,-1:18,66:10,63,66:3,-1:4,66:4,-1:18,66:12,64,66,-1:4,66:4,-1");
+"1,2,3:3,4,5,6,7,8,9,10,11,12,13,14,15,16,41,67,60,61,67:2,52,68,53,62,69,67" +
+":2,17,18,19,20,21,67:2,19,22,-1:50,23,-1:39,24,-1:46,67,25,43,67:11,-1:4,67" +
+":4,-1:36,21,-1:21,67:14,-1:4,67:4,-1:2,36:33,-1,36:5,-1,38:31,-1,38:7,1,34:" +
+"2,35,-1,34:35,-1:17,67:14,-1:4,67,63,67:2,-1,1,36:33,37,36:5,-1:17,67:3,26," +
+"67:10,-1:4,67:4,-1,1,38:31,39,38:7,-1:17,67:8,27,67:5,-1:4,67:4,-1:18,67,28" +
+",67:12,-1:4,67:4,-1:18,67:10,29,67:3,-1:4,67:4,-1:18,67:6,30,67:7,-1:4,67:4" +
+",-1:18,67:10,31,67:3,-1:4,67:4,-1:18,67:10,32,67:3,-1:4,67:4,-1:18,67:2,33," +
+"67:11,-1:4,67:4,-1:18,67:3,45,67:10,-1:4,67:4,-1:18,67:10,46,67:3,-1:4,67:4" +
+",-1:18,67:13,47,-1:4,67:4,-1:18,67:5,48,67:8,-1:4,67:4,-1:18,67:7,49,67:6,-" +
+"1:4,67:4,-1:18,67:7,47,67:6,-1:4,67:4,-1:18,67:6,50,67:7,-1:4,67:4,-1:18,67" +
+":8,51,67:5,-1:4,67:4,-1:18,67:8,54,67:5,-1:4,67:4,-1:18,67:5,55,67:8,-1:4,6" +
+"7:4,-1:18,67:6,56,67:7,-1:4,67:4,-1:18,67:6,57,67:7,-1:4,67:4,-1:18,67:3,66" +
+",67:10,-1:4,67:4,-1:18,58,67:13,-1:4,67:4,-1:18,67:13,59,-1:4,67:4,-1:18,67" +
+":10,64,67:3,-1:4,67:4,-1:18,67:12,65,67,-1:4,67:4,-1");
 
 	public Token nextToken ()
 		throws java.io.IOException {
@@ -437,7 +440,7 @@ public class Lexer {
 					case -18:
 						break;
 					case 18:
-						{ yybegin( STRING );	}
+						{ yybegin( STRINGQ );	}
 					case -19:
 						break;
 					case 19:
@@ -523,121 +526,117 @@ public class Lexer {
 						{ return new Token( Token.STR_CONST, yytext() );		}
 					case -39:
 						break;
-					case 40:
-						{return new Token( Token.ID, yytext() );	}
+					case 39:
+						{ yybegin( YYINITIAL);	}
 					case -40:
 						break;
 					case 41:
-						{ return new Token( Token.STR_CONST, yytext() );		}
+						{return new Token( Token.ID, yytext() );	}
 					case -41:
 						break;
-					case 42:
+					case 43:
 						{return new Token( Token.ID, yytext() );	}
 					case -42:
 						break;
-					case 43:
-						{ return new Token( Token.STR_CONST, yytext() );		}
-					case -43:
-						break;
-					case 44:
-						{return new Token( Token.ID, yytext() );	}
-					case -44:
-						break;
 					case 45:
 						{return new Token( Token.ID, yytext() );	}
-					case -45:
+					case -43:
 						break;
 					case 46:
 						{return new Token( Token.ID, yytext() );	}
-					case -46:
+					case -44:
 						break;
 					case 47:
 						{return new Token( Token.ID, yytext() );	}
-					case -47:
+					case -45:
 						break;
 					case 48:
 						{return new Token( Token.ID, yytext() );	}
-					case -48:
+					case -46:
 						break;
 					case 49:
 						{return new Token( Token.ID, yytext() );	}
-					case -49:
+					case -47:
 						break;
 					case 50:
 						{return new Token( Token.ID, yytext() );	}
-					case -50:
+					case -48:
 						break;
 					case 51:
 						{return new Token( Token.ID, yytext() );	}
-					case -51:
+					case -49:
 						break;
 					case 52:
 						{return new Token( Token.ID, yytext() );	}
-					case -52:
+					case -50:
 						break;
 					case 53:
 						{return new Token( Token.ID, yytext() );	}
-					case -53:
+					case -51:
 						break;
 					case 54:
 						{return new Token( Token.ID, yytext() );	}
-					case -54:
+					case -52:
 						break;
 					case 55:
 						{return new Token( Token.ID, yytext() );	}
-					case -55:
+					case -53:
 						break;
 					case 56:
 						{return new Token( Token.ID, yytext() );	}
-					case -56:
+					case -54:
 						break;
 					case 57:
 						{return new Token( Token.ID, yytext() );	}
-					case -57:
+					case -55:
 						break;
 					case 58:
 						{return new Token( Token.ID, yytext() );	}
-					case -58:
+					case -56:
 						break;
 					case 59:
 						{return new Token( Token.ID, yytext() );	}
-					case -59:
+					case -57:
 						break;
 					case 60:
 						{return new Token( Token.ID, yytext() );	}
-					case -60:
+					case -58:
 						break;
 					case 61:
 						{return new Token( Token.ID, yytext() );	}
-					case -61:
+					case -59:
 						break;
 					case 62:
 						{return new Token( Token.ID, yytext() );	}
-					case -62:
+					case -60:
 						break;
 					case 63:
 						{return new Token( Token.ID, yytext() );	}
-					case -63:
+					case -61:
 						break;
 					case 64:
 						{return new Token( Token.ID, yytext() );	}
-					case -64:
+					case -62:
 						break;
 					case 65:
 						{return new Token( Token.ID, yytext() );	}
-					case -65:
+					case -63:
 						break;
 					case 66:
 						{return new Token( Token.ID, yytext() );	}
-					case -66:
+					case -64:
 						break;
 					case 67:
 						{return new Token( Token.ID, yytext() );	}
-					case -67:
+					case -65:
 						break;
 					case 68:
 						{return new Token( Token.ID, yytext() );	}
-					case -68:
+					case -66:
+						break;
+					case 69:
+						{return new Token( Token.ID, yytext() );	}
+					case -67:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
